@@ -8,10 +8,13 @@
 
     <body>    
         <h2>Register</h2>
+        {{#if alert}}
+            <h3>{{alert}}</h3>
+        {{/if}}
 
         <form action="/register" method="POST" accept-charset="utf-8">
             Name:<br>
-            <input type="text" pattern="[A-Za-z]{3,50}" required="required" name="nome">
+            <input type="text" pattern="[A-Za-z ]{3,50}" required="required" name="nome">
 
             <br>
             CEP (Somente números):<br>

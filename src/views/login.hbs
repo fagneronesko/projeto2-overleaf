@@ -8,14 +8,16 @@
 
     <body>    
         <h2>Login</h2>
-
-        <form action="/register" method="POST" accept-charset="utf-8">
+        {{#if alert}}
+            <h3>{{alert}}</h3>
+        {{/if}}
+        <form action="/login" method="POST" accept-charset="utf-8">
             E-mail:<br>
             <input type="email" pattern="^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?" required="required" name="email">
 
             <br>
             Password:<br>
-            <input type="password" minlength="5" required="required" name="password">
+            <input type="password" minlength="5" required="required" name="senha">
 
             <br><br>
             <button type="button" onclick="javascript:history.back()">Back</button>

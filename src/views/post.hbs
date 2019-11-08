@@ -8,6 +8,9 @@
 
     <body>    
         <h2>Post</h2>
+        {{#if cache}}
+            <h3>User: {{cache}}</h3>
+        {{/if}}
 
         <form action="/post" method="POST" accept-charset="utf-8">
             Photo:<br>

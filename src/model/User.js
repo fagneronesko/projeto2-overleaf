@@ -10,7 +10,7 @@ class User{
         this.rua = data.rua;
         this.bairro = data.bairro;
         this.numero = data.numero;
-        this.complemento = data.complemento;
+        this.complemento = data.complemento; 
     }
 
     static async find (email) {
