@@ -13,11 +13,11 @@ class User{
         this.complemento = data.complemento;
     }
 
-    static async find (email,collection) {
+    static async find (email) {
         let conn = await client.connect('mongodb+srv://admin:1234@cluster0-tql9j.mongodb.net/projeto2-overleaf?retryWrites=true&w=majority',
             {useNewUrlParser: true, useUnifiedTopology: true});
         let db = conn.db();
-        return await db.collection(collection).find({email : email}).toArray();
+        return await db.collection('users').find({email : email}).toArray();
     }
     
     static async save (user) {

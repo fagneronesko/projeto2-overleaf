@@ -74,9 +74,9 @@ var session = require('express-session');
                     console.log('ja existe');
                     return res.render('register',{title: "Register", error: errors.mapped()});
                 } else{
-                    User.save(n);
+                    User.save(user);
                     console.log('sucesso ao cadastrar...');
-                    res.redirect('/home.hbs');
+                    res.redirect('/login');
                 }                
             })();            
         }
