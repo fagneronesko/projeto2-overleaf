@@ -23,6 +23,12 @@
               <button type="button" class="botao_log_in" onclick="location.href='/login'">Log In</button>
             {{/if}}
 
+            {{#if btnPost}}
+              <button type="button" class="botao_register" onclick="location.href='/post'">Post</button>
+              <button type="button" class="botao_log_in" onclick="location.href='/sair'">Sair</button>
+            {{/if}}
+            
+
           <div class="simbolo_menu">&#9776;</div>
           
         </div>
@@ -75,7 +81,7 @@
         </div>
       {{/if}}
 
-      {{#if text}}
+      {{#if post}}
         <div class="secundario">
           <div class="centralizar">
             <div class="post_image">
@@ -85,8 +91,8 @@
             </div>
 
             <div class="centralizar">
-              {{#each text}}
-                <div class="text">{{text}}</div>
+              {{#each post}}
+                <div class="text">{{email}}: {{text}}</div>
               {{/each}}
             </div>
           </div>

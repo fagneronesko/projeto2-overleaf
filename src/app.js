@@ -1,14 +1,15 @@
-let express = require('express'),
-    http = require('http'),
-    path = require('path'),
-    User = require('./model/User'),
-    app = express(),
-    bodyParser = require('body-parser'),
-    urlencodedParser = bodyParser.urlencoded({extended:false});
-    const { check, validationResult} = require('express-validator');
+const express = require('express');
+const http = require('http');
+const path = require('path');
+const User = require('./model/User');
+const Publication = require('./model/Publication');
+const app = express();
+const bodyParser = require('body-parser');
+const urlencodedParser = bodyParser.urlencoded({extended:false});
+const {check} = require('express-validator');
 
-var session = require('express-session');
-let flag = 0;
+const session = require('express-session');
+let flag = 0, login = 1;
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -24,7 +25,19 @@ app.use(session({
    
 
 app.get('/', (req, res) => {
-    res.render('index', {login:1});
+
+    (async function() {
+        const result = await Publication.find();
+        res.render('index', {login,btnPost: !login, post:result});           
+    })();   
+});
+
+app.get('/sair', (req, res) => {
+
+    req.session.email="";
+    flag = 0;
+    login = 1;
+    res.redirect('/');
 });
 
 app.get('/login', (req, res) => {
@@ -37,7 +50,6 @@ app.get('/post', (req, res) => {
         res.render('post', {
             cache: req.session.email
         })
-        console.log(req.session.email)
     }else{
         flag = 1;
         return res.redirect('/login');
@@ -78,9 +90,9 @@ app.post('/register', urlencodedParser,
 
         if(result.length > 0){
             
-            return res.redirect('/register', {alert:'Usuário já cadastrado'});
+            return res.render('register', {alert:'Usuário já cadastrado'});
         } else{
-            User.save(user);
+            await User.save(user);
             res.redirect('/login');
         }                
     })();            
@@ -99,10 +111,11 @@ app.post('/login',[
         if(result.length > 0){
             if(result[0].senha === req.body.senha){
                 req.session.email = req.body.email;
+                login = 0;
                 return res.redirect('/post');
             }
             else{
-                console.log("senha incorreta");
+                return res.render('login', {alert:'Senha incorreta'});
             }
 
         } else{
@@ -112,7 +125,22 @@ app.post('/login',[
     })();    
 })
 
+app.post('/post', urlencodedParser,
+[
+    check('text', 'Insira um texto').isLength({min:1})
+],
+(req, res) =>{
 
+    let publication = new Publication({
+        email: req.session.email,
+        text: req.body.text
+    });
+    
+    (async function() {
+        await Publication.save(publication);
+        res.redirect('/');    
+    })();            
+});
 
 
 http.createServer(app).listen(6969);

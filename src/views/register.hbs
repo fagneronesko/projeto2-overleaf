@@ -13,35 +13,35 @@
         {{/if}}
 
         <form action="/register" method="POST" accept-charset="utf-8">
-            Name:<br>
+            Name *<br>
             <input type="text" pattern="[A-Za-z ]{3,50}" required="required" name="nome">
 
             <br>
-            CEP (Somente números):<br>
+            CEP (Somente números) * <br>
             <input type="text" pattern="[0-9]{8}" required="required" name="cep">
 
             <br>
-            Neighborhood:<br>
+            Neighborhood *<br>
             <input type="text" pattern="[A-Za-z]{3,15}" required="required" name="bairro">
 
             <br>
-            Street:<br>
+            Street *<br>
             <input type="text" pattern="[A-Za-z]{3,15}" required="required" name="rua">
 
             <br>
-            Number:<br>
+            Number *<br>
             <input type="text" pattern="[0-9]*" required="required" name="numero">
 
             <br>
-            Complement:<br>
+            Complement<br>
             <input type="text" pattern="[A-Za-z0-9]{3,15}" name="complemento">
 
             <br><br><br>
-            E-mail:<br>
+            E-mail *<br>
             <input type="email" pattern="^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?" required="required" name="email">
 
             <br>
-            Password:<br>
+            Password *<br>
             <input type="password" minlength="5" required="required" name="senha">
 
             <br><br>
