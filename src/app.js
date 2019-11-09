@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 
     (async function() {
         const result = await Publication.find();
-        res.render('index', {login,btnPost: !login, post:result});           
+        res.render('index', {login,btnPost: !login,search: !login ,post:result});           
     })();   
 });
 
@@ -145,6 +145,26 @@ app.post('/post', urlencodedParser,
         flag = 1;
         return res.redirect('/login');
     }            
+});
+
+app.post('/search', (req, res) => {
+    if(req.session && req.session.email){
+        (async function() {
+            const result = await Publication.search(req.body.search); 
+            if(result.length > 0){
+                res.render('search', {
+                    result: result
+                })
+            } else{
+                res.render('search', {
+                    nada: 'Nenhum resultado encontrado'
+                })
+            }                
+        })();
+    }else{
+        flag = 1;
+        return res.redirect('/login');
+    }
 });
 
 //http.createServer(app).listen(process.env.PORT || 8001);

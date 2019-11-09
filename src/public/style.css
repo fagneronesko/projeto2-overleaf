@@ -361,3 +361,8 @@ div.text{
   text-align: center;
   max-width: 440px;
 }
+
+div.search{
+  margin: 0 auto;
+  width: 10%;
+}

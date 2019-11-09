@@ -20,6 +20,13 @@ class Publication{
         let db = await conn.db('mongo-test');
         return await db.collection('publications').insertOne(publication);
     }
+
+    static async search (search) {
+        let conn = await client.connect('mongodb://localhost:27017/mongo-test',
+            {useNewUrlParser: true, useUnifiedTopology: true});
+        let db = await conn.db('mongo-test');
+        return await db.collection('publications').find({$or: [{email: search}, {text: {$in: [search]}}]}).toArray();
+    }
 }
 
 module.exports = Publication;

@@ -81,6 +81,16 @@
         </div>
       {{/if}}
 
+      {{#if search}}
+        <div class="search">
+          <form action="/search" method="POST" accept-charset="utf-8">
+            Search:<br>
+            <textarea rows="3" cols="50" maxlength="200" required="required" name="search"></textarea>
+            <br>
+            <input type="submit" value="Submit">
+          </form> 
+        </div>
+      {{/if}}
       {{#if post}}
         <div class="secundario">
           <div class="centralizar">
