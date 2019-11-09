@@ -131,17 +131,22 @@ app.post('/post', urlencodedParser,
 ],
 (req, res) =>{
 
-    let publication = new Publication({
-        email: req.session.email,
-        text: req.body.text
-    });
-    
-    (async function() {
-        await Publication.save(publication);
-        res.redirect('/');    
-    })();            
+    if(req.session && req.session.email){
+        let publication = new Publication({
+            email: req.session.email,
+            text: req.body.text
+        });
+        
+        (async function() {
+            await Publication.save(publication);
+            res.redirect('/');    
+        })();
+    }else{
+        flag = 1;
+        return res.redirect('/login');
+    }            
 });
 
-http.createServer(app).listen(process.env.PORT || 8001);
+//http.createServer(app).listen(process.env.PORT || 8001);
 
-//http.createServer(app).listen(3000);
+http.createServer(app).listen(3000);
