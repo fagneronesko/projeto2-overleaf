@@ -14,16 +14,16 @@ class User{
     }
 
     static async find (email) {
-        let conn = await client.connect('mongodb://localhost:27017/mongo-test',
+        let conn = await client.connect('mongodb+srv://admin:1234@cluster0-tql9j.mongodb.net/projeto2?retryWrites=true&w=majority',
             {useNewUrlParser: true, useUnifiedTopology: true});
-        let db = await conn.db('mongo-test');
+        let db = await conn.db();
         return await db.collection('users').find({email : email}).toArray();
     }
     
     static async save (user) {
-        let conn = await client.connect('mongodb://localhost:27017/mongo-test',
+        let conn = await client.connect('mongodb+srv://admin:1234@cluster0-tql9j.mongodb.net/projeto2?retryWrites=true&w=majority',
             {useNewUrlParser: true, useUnifiedTopology: true});
-        let db = await conn.db('mongo-test');
+        let db = await conn.db();
         return await db.collection('users').insertOne(user);
     }
 }

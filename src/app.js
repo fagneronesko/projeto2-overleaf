@@ -14,7 +14,7 @@ const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const crypto = require('crypto');
 
-const mongoURI = 'mongodb://localhost:27017/mongo-test';
+const mongoURI = 'mongodb+srv://admin:1234@cluster0-tql9j.mongodb.net/projeto2?retryWrites=true&w=majority';
 
 const conn = mongoose.createConnection(mongoURI);
 
@@ -219,6 +219,6 @@ app.post('/search', (req, res) => {
     }
 });
 
-//http.createServer(app).listen(process.env.PORT || 8001);
+http.createServer(app).listen(process.env.PORT || 8001);
 
-http.createServer(app).listen(8000);
+//http.createServer(app).listen(8000);
