@@ -12,9 +12,9 @@
             <h3>User: {{cache}}</h3>
         {{/if}}
 
-        <form action="/post" method="POST" accept-charset="utf-8">
+        <form action="/post" method="POST" enctype="multipart/form-data">
             Photo:<br>
-            <input type="file" accept="image/*" name="img">
+            <input type="file" name="file" id="file" required="required">
 
             <br>
             Text:<br>
